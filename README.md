@@ -2,6 +2,8 @@
 
 This code defines an actor that manages a file tree using TrieMap. The file tree consists of folders and files, where each folder can have multiple files. The implementation provides methods to add folders and files to the tree and browse the tree content.
 
+***Please note that this dfws code has not been thoroughly tested, and you may encounter many bugs. Use it at your own risk, and feel free to report any issues you find or contribute to help fixing the code bug you might encounter.***
+
 ## Key Components
 
 ### Imports
