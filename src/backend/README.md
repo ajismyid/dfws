@@ -1,1 +1,1 @@
-
+This Motoko code defines a basic file and folder management system, allowing the creation of folders, adding files to folders, and browsing the contents of the file system. The main data structure used is a FileTree, which is a TrieMap (a key-value mapping data structure) with custom hash and equality functions. The program defines the custom types File, Folder, and Result for easier handling of data and error cases.
