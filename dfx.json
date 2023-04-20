@@ -1,0 +1,25 @@
+{
+  "canisters": {
+    "backend": {
+      "main": "src/backend/main.mo",
+      "type": "motoko"
+    },
+    "frontend": {
+      "main": "src/frontend/index.js",
+      "dependencies": ["backend"],
+      "type": "assets",
+      "source": ["src/frontend"]
+    }
+  },
+  "defaults": {
+    "build": {
+      "packtool": ""
+    }
+  },
+  "networks": {
+    "local": {
+      "bind": "localhost:8000"
+    }
+  },
+  "version": 1
+}
