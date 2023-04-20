@@ -1,12 +1,18 @@
+// Import necessary modules from React and ReactDOM
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
+
+// Import Actor and HttpAgent from Dfinity agent module
 import { Actor, HttpAgent } from '@dfinity/agent';
+
+// Import backend canister ID and IDL factory from DFINITY generated code
 import { idlFactory as backend_idl, canisterId as backend_canister_id } from 'dfx-generated/backend';
 
+// Create an HttpAgent and an Actor to interact with the backend canister
 const agent = new HttpAgent();
 const backend = Actor.createActor(backend_idl, { agent, canisterId: backend_canister_id });
 
-// ... FileBrowser component implementation
+// FileBrowser component to display folders and files
 function FileBrowser({ folders }) {
   return (
     <div>
@@ -27,7 +33,7 @@ function FileBrowser({ folders }) {
   );
 }
   
-// ... UploadForm component implementation
+// UploadForm component to handle folder and file creation and upload
 function UploadForm({ onAddFolder, onAddFile }) {
   const [folderName, setFolderName] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
@@ -71,10 +77,12 @@ function UploadForm({ onAddFolder, onAddFile }) {
   );
 }
 
-
+// Main App component
 function App() {
+  // State to store folders and their files
   const [folders, setFolders] = useState([]);
-
+  
+  // Fetch data from backend canister on component mount
   useEffect(() => {
     async function fetchData() {
       const result = await backend.browse();
@@ -83,12 +91,14 @@ function App() {
     fetchData();
   }, []);
 
+  // Function to add a new folder
   async function addFolder(folderName) {
     await backend.addFolder(folderName);
     const result = await backend.browse();
     setFolders(result);
   }
-
+  
+  // Function to add a new file to a folder
   async function addFile(folderName, fileName, content) {
     const blob = new Blob([content]);
     const result = await backend.addFile(folderName, fileName, blob);
@@ -99,7 +109,8 @@ function App() {
       alert(result.Err);
     }
   }
-
+  
+  // Render components with appropriate props
   return (
     <div>
       <h1>Decentralized File/Web Server</h1>
@@ -109,4 +120,5 @@ function App() {
   );
 }
 
+// Render the App component to the DOM
 ReactDOM.render(<App />, document.getElementById('root'));
